@@ -13,8 +13,8 @@ OLED display 128x32 SPI
 
 module with max484
 
+---------------------------------------
 
+U can use web browser to config settings
 
-Use web browser to config settings
-
-U can record static scene
+U can record static scene.
