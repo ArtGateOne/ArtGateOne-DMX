@@ -1,6 +1,4 @@
 # ArtGateOne-DMX
-ArtNet ArduinoUNO DMX gate
-
 This is simple artnet node.
 
 
