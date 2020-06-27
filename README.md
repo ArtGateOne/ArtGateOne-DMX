@@ -12,5 +12,3 @@ module with max484
 
 Use web browser to config settings
 U can record static scene
-
-
