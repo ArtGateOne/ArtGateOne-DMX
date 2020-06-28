@@ -9,7 +9,7 @@ Ethernet Shield with W5100/W5500
 
 OLED display 128x32 SPI
 
-module with max484
+module with max485
 
 ---------------------------------------
 
