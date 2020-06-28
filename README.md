@@ -38,6 +38,8 @@ RO --> not connnected
 
 RE + DE + VCC --> 5v
 
+ro --> TX (D1 PIN)
+
 GND --> GND
 
 A --> DMX OUT
