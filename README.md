@@ -13,9 +13,18 @@ module with max485
 
 ---------------------------------------
 
-U can use web browser to config settings
+Universal Ethernet to DMX Interface
 
-U can record static scene.
+ONE DMX512 Port
+
+Art-Net streaming DMX support
+
+Can be used with any Art-Net compliant console or DMX software
+
+Universe selectable by web beowser
+
+
+Stand-alone DMX buffer mode
 
 ---------------------------------------
 
