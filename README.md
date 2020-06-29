@@ -21,7 +21,7 @@ Art-Net streaming DMX support
 
 Can be used with any Art-Net compliant console or DMX software
 
-Universe selectable by web beowser
+Universe selectable by web browser
 
 
 Stand-alone DMX buffer mode
