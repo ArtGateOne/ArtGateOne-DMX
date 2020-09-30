@@ -50,7 +50,7 @@ void setup()
   //data = (EEPROM.read(512));//odczyt dhcp - jesli inny reset & save
   if (EEPROM.read(550) == 0 || EEPROM.read(550) == 255) {
     EEPROM.update(512, 1);    //zapis DHCP off
-    EEPROM.update(513, 10);   //IP
+    EEPROM.update(513, 2);   //IP
     EEPROM.update(514, 0);
     EEPROM.update(515, 0);
     EEPROM.update(516, 10);
