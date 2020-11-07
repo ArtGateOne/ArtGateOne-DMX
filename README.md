@@ -7,7 +7,7 @@ Arduino UNO
 
 Ethernet Shield with W5100/W5500
 
-OLED display 128x32
+OLED display 128x32 I2C
 
 module with max485
 
@@ -30,7 +30,7 @@ Stand-alone DMX buffer mode
 
 WIRING
 
-OLED DISPLAY
+OLED DISPLAY I2C
 
 VCC --> 5v or 3.3v
 
