@@ -47,7 +47,7 @@ RO --> not connnected
 
 RE + DE + VCC --> 5v
 
-ro --> TX (D1 PIN)
+DI --> TX (D1 PIN)
 
 GND --> GND
 
