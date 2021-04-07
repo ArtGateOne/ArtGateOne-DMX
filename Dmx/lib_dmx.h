@@ -42,9 +42,9 @@
 
 // *** comment UARTs not used ***
 #define        USE_UART0
-//#define        USE_UART1
-//#define        USE_UART2
-//#define        USE_UART3
+#define        USE_UART1
+#define        USE_UART2
+#define        USE_UART3
 
 // New DMX modes *** EXPERIMENTAL ***
 #define        DMX512            (0)    // DMX-512 (250 kbaud - 512 channels) Standard USITT DMX-512
@@ -74,20 +74,20 @@ extern "C" {
 #endif
   #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
     #if defined(USE_UART0)
-      void SIG_USART0_RECV  (void) __attribute__((__always_inline__));
-      void SIG_USART0_TRANS (void) __attribute__((__always_inline__));
+      void USART0_RX_vect  (void) __attribute__((__always_inline__));
+      void USART0_TX_vect (void) __attribute__((__always_inline__));
     #endif
     #if defined(USE_UART1)
-      void SIG_USART1_RECV  (void) __attribute__((__always_inline__));
-      void SIG_USART1_TRANS (void) __attribute__((__always_inline__));
+      void USART1_RX_vect  (void) __attribute__((__always_inline__));
+      void USART1_TX_vect (void) __attribute__((__always_inline__));
     #endif
     #if defined(USE_UART2)  
-      void SIG_USART2_RECV  (void) __attribute__((__always_inline__));
-      void SIG_USART2_TRANS (void) __attribute__((__always_inline__));
+      void USART2_RX_vect  (void) __attribute__((__always_inline__));
+      void USART2_TX_vect (void) __attribute__((__always_inline__));
     #endif
     #if defined(USE_UART3)  
-      void SIG_USART3_RECV  (void) __attribute__((__always_inline__));
-      void SIG_USART3_TRANS (void) __attribute__((__always_inline__));
+      void USART3_RX_vect  (void) __attribute__((__always_inline__));
+      void USART3_TX_vect (void) __attribute__((__always_inline__));
     #endif
   #elif defined(__AVR_ATmega328P__) || defined(__AVR_ATmega168__)
     #if defined(USE_UART0)
@@ -103,20 +103,20 @@ class CArduinoDmx
 { 
   #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
     #if defined(USE_UART0)
-      friend void SIG_USART0_RECV  (void);
-      friend void SIG_USART0_TRANS (void);
+      friend void USART0_RX_vect  (void);
+      friend void USART0_TX_vect (void);
     #endif
     #if defined(USE_UART1)
-      friend void SIG_USART1_RECV  (void);
-      friend void SIG_USART1_TRANS (void);
+      friend void USART1_RX_vect  (void);
+      friend void USART1_TX_vect (void);
     #endif
     #if defined(USE_UART2)  
-      friend void SIG_USART2_RECV  (void);
-      friend void SIG_USART2_TRANS (void);
+      friend void USART2_RX_vect  (void);
+      friend void USART2_TX_vect (void);
     #endif
     #if defined(USE_UART3)  
-      friend void SIG_USART3_RECV  (void);
-      friend void SIG_USART3_TRANS (void);
+      friend void USART3_RX_vect  (void);
+      friend void USART3_TX_vect (void);
     #endif
   #elif defined(__AVR_ATmega328P__) || defined(__AVR_ATmega168__)
     #if defined(USE_UART0)

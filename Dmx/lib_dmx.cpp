@@ -196,25 +196,25 @@ void CArduinoDmx::init_rx(uint8_t mode)
 // *************** DMX Reception ISR ****************
 #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
   #if defined(USE_UART0)
-    ISR (SIG_USART0_RECV)
+    ISR (USART0_RX_vect)
     {
       ArduinoDmx0.Process_ISR_RX(0);
     }
   #endif
   #if defined(USE_UART1)
-    ISR (SIG_USART1_RECV)
+    ISR (USART1_RX_vect)
     {
       ArduinoDmx1.Process_ISR_RX(1);
     }
   #endif
   #if defined(USE_UART2)
-    ISR (SIG_USART2_RECV)
+    ISR (USART2_RX_vect)
     {
       ArduinoDmx2.Process_ISR_RX(2);
     }
   #endif
   #if defined(USE_UART3)
-    ISR (SIG_USART3_RECV)
+    ISR (USART3_RX_vect)
     {
       ArduinoDmx3.Process_ISR_RX(3);
     }
@@ -319,25 +319,25 @@ void CArduinoDmx::Process_ISR_RX(uint8_t rx_isr_number)
 // *************** DMX Transmision ISR ****************
 #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
   #if defined(USE_UART0)
-    ISR(SIG_USART0_TRANS)
+    ISR(USART0_TX_vect)
     {
       ArduinoDmx0.Process_ISR_TX(0);
     }
   #endif
   #if defined(USE_UART1)
-    ISR(SIG_USART1_TRANS)
+    ISR(USART1_TX_vect)
     {
       ArduinoDmx1.Process_ISR_TX(1);
     }
   #endif
   #if defined(USE_UART2)
-    ISR(SIG_USART2_TRANS)
+    ISR(USART2_TX_vect)
     {
       ArduinoDmx2.Process_ISR_TX(2);
     }
   #endif
   #if defined(USE_UART3)
-    ISR(SIG_USART3_TRANS)
+    ISR(USART3_TX_vect)
     {
       ArduinoDmx3.Process_ISR_TX(3);
     }
