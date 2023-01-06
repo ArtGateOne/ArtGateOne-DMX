@@ -62,3 +62,8 @@ OLED REQUIRED TO CORRECT WORK
 
 
 IF U DONT HAVE OLED DISPLAY _ USE NO OLED VERSION
+
+
+----------
+
+Due to the limited amount of Arduino memory - the program recognizes only full ArdDMX frames - containing 512 channels, and ArtPool packages.
