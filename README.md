@@ -66,4 +66,8 @@ IF U DONT HAVE OLED DISPLAY _ USE NO OLED VERSION
 
 ----------
 
+U can configure it - use web browser - enter node ip
+
+A3 pin to Groun = Factory Reset
+
 Due to the limited amount of Arduino memory - the program recognizes only full ArtDMX frames - containing 512 channels, and ArtPool packages.
