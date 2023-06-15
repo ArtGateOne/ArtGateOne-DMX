@@ -37,7 +37,7 @@ void setup()
   int pinValue = digitalRead(analogPin);
   if (EEPROM.read(550) == 0 || EEPROM.read(550) == 255 || pinValue == LOW)//check first run or PIN3 to GND (FACTORY RESET)
   {                        // write default config
-    EEPROM.update(512, 0); // DHCP 1=off, 0=on
+    EEPROM.update(512, 1); // DHCP 1=off, 0=on
     EEPROM.update(513, 2); // IP
     EEPROM.update(514, 0);
     EEPROM.update(515, 0);
