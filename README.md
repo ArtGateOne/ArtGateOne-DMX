@@ -66,7 +66,7 @@ IF U DONT HAVE OLED DISPLAY _ USE NO OLED VERSION
 
 ----------
 
-U can configure it - use web browser - enter node ip
+U can configure it - use web browser - enter node ip (default 2.0.0.10)
 
 A3 pin to Groun = Factory Reset
 
