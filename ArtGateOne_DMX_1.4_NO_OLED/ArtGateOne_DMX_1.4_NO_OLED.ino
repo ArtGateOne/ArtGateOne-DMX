@@ -347,7 +347,7 @@ void loop() {
 
   // if there's data available, read a packet
   int packetSize = Udp.parsePacket();
-  if (packetSize == 14 || packetSize == 18 || packetSize == 24) {
+  if (packetSize == 14 || packetSize == 18) {
     // send a ArtPoolReply to the IP address and port that sent us the packet we received
     // Udp.beginPacket(Udp.remoteIP(), Udp.remotePort());
     Udp.beginPacket(0xFFFFFFFF, Udp.remotePort());
