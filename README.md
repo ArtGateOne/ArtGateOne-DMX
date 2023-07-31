@@ -71,3 +71,6 @@ U can configure it - use web browser - enter node ip (default 2.0.0.10)
 A3 pin to Ground ehwn boot = Factory Reset
 
 Due to the limited amount of Arduino memory - the program recognizes only full ArtDMX frames - containing 512 channels, and ArtPool packages.
+
+-----------
+"Art-Net™ Designed by and Copyright Artistic Licence Engineering Ltd"
