@@ -1,5 +1,5 @@
 /*
-  ArtGateOne DMX v1.4.4
+  ArtGateOne DMX v1.4.5
 */
 
 #include <lib_dmx.h>  // comment/uncomment #define USE_UARTx in lib_dmx.h as needed
@@ -11,14 +11,13 @@
 #include "SSD1306AsciiAvrI2c.h"
 #include <EEPROM.h>
 
-#define DMX512 (0)  // (250 kbaud - 2 to 512 channels) Standard USITT DMX-512
+#define DMX512 (0)    // (250 kbaud - 2 to 512 channels) Standard USITT DMX-512
+#define analogPin A3  //Factory default
+#define I2C_ADDRESS 0x3C // OLED i2c addres
 
-const int analogPin = A3;
-
-// OLED i2c addres
-#define I2C_ADDRESS 0x3C
 SSD1306AsciiAvrI2c oled;
 
+bool invert = false;
 int post = 0;
 unsigned int datalen;
 int data;
@@ -367,6 +366,8 @@ void loop() {
   // if there's data available, read a packet
   int packetSize = Udp.parsePacket();
   if (packetSize == 14 || packetSize == 18) {
+    invert = !invert;
+    oled.invertDisplay(invert);
     // send a ArtPollReply to the IP address and port that sent us the packet we received
     // Udp.beginPacket(Udp.remoteIP(), Udp.remotePort());
     Udp.beginPacket(Udp.remoteIP(), Udp.remotePort());
@@ -690,7 +691,7 @@ int datamac(int i) {
 
 void displaydata() {
   oled.clear();
-  oled.print("IP : ");
+  oled.print(" IP : ");
   oled.print(Ethernet.localIP());
   if (EEPROM.read(534) == 1) {
     oled.println("  BS");
@@ -705,7 +706,7 @@ void displaydata() {
   oled.print("  Uni ");
   oled.print(intU, HEX);
   */
-  oled.print("Universe ");
+  oled.print(" Universe ");
   oled.print(intUniverse);
   return;
 }  // end displaydata()
