@@ -42,9 +42,9 @@
 
 // *** comment UARTs not used ***
 #define        USE_UART0
-#define        USE_UART1
-#define        USE_UART2
-#define        USE_UART3
+//#define        USE_UART1
+//#define        USE_UART2
+//#define        USE_UART3
 
 // New DMX modes *** EXPERIMENTAL ***
 #define        DMX512            (0)    // DMX-512 (250 kbaud - 512 channels) Standard USITT DMX-512
