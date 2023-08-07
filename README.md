@@ -74,3 +74,13 @@ Due to the limited amount of Arduino memory - the program recognizes only full A
 
 -----------
 "Art-Net™ Designed by and Copyright Artistic Licence Engineering Ltd"
+
+-----------
+v1.4.6
+Update of the ArtPollReply frame for Art-Net 4 Protocol Release V1.4 Document Revision 1.4dh 19/7/2023
+The code displays information on an OLED 128x32 or 128x64 (you need to define the correct I2C address)
+Changes in DHCP and Static configuration storage
+Change of memory number on first startup
+Change of favicon.
+
+Web configuration not work on Firefox - use Edge,Chrome,Opera ...
