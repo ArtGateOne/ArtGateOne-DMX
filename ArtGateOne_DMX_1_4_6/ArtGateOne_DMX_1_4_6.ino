@@ -1,5 +1,5 @@
 /*
-  ArtGateOne DMX v1.4.6
+  ArtGateOne DMX v1.4.7
 */
 
 #include <lib_dmx.h>  // comment/uncomment #define USE_UARTx in lib_dmx.h as needed
@@ -138,10 +138,7 @@ void loop() {
             client.println(F("<link rel='icon' type='image/png' sizes='16x16' href='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAFzUkdCAK7OHOkAAAAEZ0FNQQAAsY8L/GEFAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAX3pUWHRSYXcgcHJvZmlsZSB0eXBlIEFQUDEAAAiZ40pPzUstykxWKCjKT8vMSeVSAANjEy4TSxNLo0QDAwMLAwgwNDAwNgSSRkC2OVQo0QAFmJibpQGhuVmymSmIzwUAT7oVaBst2IwAAAGiSURBVDhPfZI7TwJREIVH0Ig8FHQRRPH1C9TSGAM/guVhjCQGSXzFytigndFKTbTAVu1JNBZEG6w0kRBsaDARwRYCKGAz7l4mi7i7ftXMObNnZ+9dQBUymQyenZ5Sp45qQHg5hACqtoTqhPiwrrML7+/uSVFGIwzKuIvHQTQ4joPzaLQpqtAhplAtEfD5oPb1BcnnJOQ+CuKW5MhR3KBWr8PG5haUSiUwG4xwdXFJjgLiBr853D/Ah0SC1aI96hjG+dk51ishC5iZmqYKkfd4cMQ+9O9tyD7BOmilCiC4FIRisQic2QInx0ek/oGCGJFIBAv5AnVNOoSR8REnTo6NkdJO2y3YLAPALy5ApVxmvV6vh9vrG9BqNPCae4NyuQImk5F5EixG4LvRQL/XT12Lp8dH7NZ2op2z4s72NqktpID1tTUsvOepa0d8z4RzFI3dOlJaSAFOh4MqOavhMDoGbagVgl7SaVKbsIBsNovh0AoTlEilUmyL3h4DBrxeUpuwQ4zFYuB2uaDPbGbnosTe7i70WyxQrX5CXvi93W438DwPP40aa/Jc/0S8AAAAAElFTkSuQmCC'>"));
             client.println(F("<title>ArtGateOne setup</title>"));
             client.println(F("<meta charset='UTF-8'>"));
-            client.println(F("<meta name='description' content='ArtGateOne setup page.'>"));
-            client.println(F("<meta name='keywords' content='HTML,CSS,XML,JavaScript'>"));
             client.println(F("<meta name='viewport' content='width=device-width, initial-scale=1.0'>"));
-            client.println(F("<meta name='author' content='ArtGateOne'>"));
             client.println(F("<style>"));
             client.println(F("body {text-align: center;}"));
             client.println(F("div {width:340px; display: inline-block; text-align: center;}"));
@@ -158,27 +155,27 @@ void loop() {
             client.println(F("<label for='quantity'>Mode:</label>"));
             client.println(F("<select id='mode' name='dhcp'>"));
             if (EEPROM.read(512) == 0) {
-              client.println(F("<option value='0'selected>Static</option>"));
-              client.println(F("<option value='1'>DHCP</option>"));
+              client.println(F("<option value='0'selected> Static </option>"));
+              client.println(F("<option value='1'> DHCP </option>"));
             } else {
-              client.println(F("<option value='0'>Static</option>"));
-              client.println(F("<option value='1'selected>DHCP</option>"));
+              client.println(F("<option value='0'> Static </option>"));
+              client.println(F("<option value='1'selected> DHCP </option>"));
             }
             client.println(F("</select><br>"));
 
-            client.println(F("<label for='quantity'>IP Address:</label>"));
+            client.println(F("<label for='ipaddress'>IP Address:</label>"));
             client.print(F("<input type='tel' id='ethernet' name='ipaddress' value='"));
             client.print(Ethernet.localIP());
             client.println(F("' pattern='((^|\\.)((25[0-5])|(2[0-4]\\d)|(1\\d\\d)|([1-9]?\\d))){4}$' required><br>"));
-            client.println(F("<label for='quantity'>Subnet mask:</label>"));
+            client.println(F("<label for='subnet'>Subnet mask:</label>"));
             client.print(F("<input type='tel' id='ethernet' name='subnet' value='"));
             client.print(Ethernet.subnetMask());
             client.println(F("' pattern='((^|\\.)((25[0-5])|(2[0-4]\\d)|(1\\d\\d)|([1-9]?\\d))){4}$' required><br>"));
-            client.println(F("<label for='quantity'>Gateway:</label>"));
+            client.println(F("<label for='qateway'>Gateway:</label>"));
             client.print(F("<input type='tel' id='ethernet' name='gateway' value='"));
             client.print(Ethernet.gatewayIP());
             client.println(F("' pattern='((^|\\.)((25[0-5])|(2[0-4]\\d)|(1\\d\\d)|([1-9]?\\d))){4}$' required><br>"));
-            client.println(F("<label for='quantity'>MAC Address:</label>"));
+            client.println(F("<label for='mac'>MAC Address:</label>"));
             client.print(F("<input type='text' id='ethernet' name='mac' value='"));
             if (EEPROM.read(525) <= 15) {
               client.print(F("0"));
@@ -213,22 +210,22 @@ void loop() {
             client.println(F("</fieldset><br>"));
             client.println(F("<fieldset>"));
             client.println(F("<legend>ArtNet:</legend>"));
-            client.println(F("<label for='quantity'>Net:</label>"));
-            client.print(F("<input type='number' id='artnet' name='net' min='0' max='127' required value='"));
+            client.println(F("<label for='net'>Net:</label>"));
+            client.print(F("<input type='number' id='net' name='net' min='0' max='127' required value='"));
             client.print(EEPROM.read(531));
             client.println(F("'><br>"));
-            client.println(F("<label for='quantity'>Subnet:</label>"));
-            client.print(F("<input type='number' id='artnet' name='subnet' min='0' max='15' required value='"));
+            client.println(F("<label for='sub'>Subnet:</label>"));
+            client.print(F("<input type='number' id='sub' name='subnet' min='0' max='15' required value='"));
             client.print(EEPROM.read(532));
             client.println(F("'><br>"));
-            client.println(F("<label for='quantity'>Universe:</label>"));
-            client.print(F("<input type='number' id='artnet' name='universe' min='0' max='15' required value='"));
+            client.println(F("<label for='uni'>Universe:</label>"));
+            client.print(F("<input type='number' id='uni' name='universe' min='0' max='15' required value='"));
             client.print(EEPROM.read(533));
             client.println(F("'><br>"));
             client.println(F("</fieldset><br>"));
             client.println(F("<fieldset>"));
             client.println(F("<legend>Boot:</legend>"));
-            client.println(F("<label for='quantity'>Startup scene:</label>"));
+            client.println(F("<label for='scene'>Startup scene:</label>"));
             client.println(F("<select id='scene' name='scene' value='Enable'>"));
             if (EEPROM.read(534) == 0) {
               client.println(F("<option value='0' selected>Disabled</option>"));
@@ -243,7 +240,7 @@ void loop() {
             client.println(F("<input type='reset' value='Reset'>"));
             client.println(F("<input type='submit' value='Submit' formmethod='post'><br><br><br>"));
             client.println(F("</form>"));
-            client.println(F("<p>' Art - Net™ Designed by and Copyright Artistic Licence Engineering Ltd '</p>"));
+            client.println(F("<p>Art - Net™ Designed by and Copyright Artistic Licence Engineering Ltd</p>"));
             client.println(F("</div>"));
             client.println(F("</body>"));
             client.println(F("</html>"));
@@ -291,7 +288,7 @@ void loop() {
           client.println(F("User-Agent: ArtGateOne"));
           client.println();
           client.println(F("<!DOCTYPE HTML>"));
-          client.println(F("<html>"));
+          client.println(F("<html lang='en'>"));
           client.println(F("<head>"));
           client.println(F("<link rel='icon' type='image/png' sizes='16x16' href='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAAE0lEQVR42mP8X8+AFzCOKhhJCgAePhfxCE5/6wAAAABJRU5ErkJggg=='>"));  //szara
           client.println(F("<title>ArtGateOne setup</title>"));
@@ -305,10 +302,7 @@ void loop() {
           client.print(F("."));
           client.print(EEPROM.read(516));
           client.println(F("'>"));
-          client.println(F("<meta name='description' content='ArtGateOne setup page.'>"));
-          client.println(F("<meta name='keywords' content='HTML,CSS,XML,JavaScript'>"));
           client.println(F("<meta name='viewport' content='width=device-width, initial-scale=1.0'>"));
-          client.println(F("<meta name='author' content='ArtGateOne'>"));
           client.println(F("<style>"));
           client.println(F("body {text-align: center;}"));
           client.println(F("div {width:340px; display: inline-block; text-align: center;}"));
