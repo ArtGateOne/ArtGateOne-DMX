@@ -1,5 +1,5 @@
 /*
-  ArtGateOne DMX v1.4.5
+  ArtGateOne DMX v1.4 Firefox
 */
 
 #include <lib_dmx.h>  // comment/uncomment #define USE_UARTx in lib_dmx.h as needed
@@ -11,9 +11,9 @@
 #include "SSD1306AsciiAvrI2c.h"
 #include <EEPROM.h>
 
-#define DMX512 (0)    // (250 kbaud - 2 to 512 channels) Standard USITT DMX-512
-#define analogPin A3  //Factory default
-#define I2C_ADDRESS 0x3C // OLED i2c addres
+#define DMX512 (0)        // (250 kbaud - 2 to 512 channels) Standard USITT DMX-512
+#define analogPin A3      //Factory default
+#define I2C_ADDRESS 0x3C  // OLED i2c addres
 
 SSD1306AsciiAvrI2c oled;
 
@@ -42,14 +42,14 @@ void setup() {
   oled.setFont(Arial14);
   oled.set1X();
   oled.clear();
-  oled.println("        ArtGateOne");
+  oled.println("ArtGateOne");
   Ethernet.init(10);
   pinMode(analogPin, INPUT_PULLUP);
   int pinValue = digitalRead(analogPin);
-  if (EEPROM.read(550) == 0 || EEPROM.read(550) == 255 || pinValue == LOW)  // check first run or PIN3 to GND (FACTORY RESET)
-  {                                                                         // write default config
-    EEPROM.update(512, 1);                                                  // DHCP 1=off, 0=on
-    EEPROM.update(513, 2);                                                  // IP
+  if (EEPROM.read(1023) == 0 || EEPROM.read(1023) == 255 || pinValue == LOW)  // check first run or PIN3 to GND (FACTORY RESET)
+  {                                                                           // write default config
+    EEPROM.update(512, 0);                                                    // DHCP 0=off, 1=on
+    EEPROM.update(513, 2);                                                    // IP
     EEPROM.update(514, 0);
     EEPROM.update(515, 0);
     EEPROM.update(516, 10);
@@ -71,9 +71,8 @@ void setup() {
     EEPROM.update(532, 0);       // Art-Net Sub
     EEPROM.update(533, 0);       // Art-Net Uni
     EEPROM.update(534, 0);       // boot scene
-    EEPROM.update(535, 1);       // not used
-    EEPROM.update(550, 1);       // komórka kontrolna
-    oled.println("        RESET");
+    EEPROM.update(1023, 1);      // Factory default
+    oled.println("RESET");
     // delay(1500);
   }
   byte mac[] = { EEPROM.read(525), EEPROM.read(526), EEPROM.read(527), EEPROM.read(528), EEPROM.read(529), EEPROM.read(530) };
@@ -83,10 +82,10 @@ void setup() {
   IPAddress gateway(EEPROM.read(521), EEPROM.read(522), EEPROM.read(523), EEPROM.read(524));
 
   // initialize the ethernet device
-  if (EEPROM.read(512) == 1) {
+  if (EEPROM.read(512) == 0) {
     Ethernet.begin(mac, ip, dns, gateway, subnet);
   } else {
-    oled.println("        DHCP ...");
+    oled.println("DHCP");
     if (Ethernet.begin(mac) == 0) {
       Ethernet.begin(mac, ip, dns, gateway, subnet);
     }
@@ -139,10 +138,7 @@ void loop() {
             client.println(F("<link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAAE0lEQVR42mP8X8+AFzCOKhhJCgAePhfxCE5/6wAAAABJRU5ErkJggg==\">"));
             client.println(F("<title>ArtGateOne setup</title>"));
             client.println(F("<meta charset=\"UTF-8\">"));
-            client.println(F("<meta name=\"description\" content=\"ArtGateOne v.1.0 setup page.\">"));
-            client.println(F("<meta name=\"keywords\" content=\"HTML,CSS,XML,JavaScript\">"));
             client.println(F("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"));
-            client.println(F("<meta name=\"author\" content=\"ArtGateOne\">"));
             client.println(F("<style>"));
             client.println(F("body {text-align: center;}"));
             client.println(F("div {width:340px; display: inline-block; text-align: center;}"));
@@ -159,11 +155,11 @@ void loop() {
             client.println(F("<label for=\"quantity\">Mode:</label>"));
             client.println(F("<select id=\"mode\" name=\"dhcp\">"));
             if (EEPROM.read(512) == 0) {
-              client.println(F("<option value=\"0\" selected>DHCP</option>"));
-              client.println(F("<option value=\"1\">Static</option>"));
+              client.println(F("<option value=\"0\" selected>Static</option>"));
+              client.println(F("<option value=\"1\">DHCP</option>"));
             } else {
-              client.println(F("<option value=\"0\">DHCP</option>"));
-              client.println(F("<option value=\"1\" selected>Static</option>"));
+              client.println(F("<option value=\"0\">Static</option>"));
+              client.println(F("<option value=\"1\" selected>DHCP</option>"));
             }
             client.println(F("</select><br>"));
 
@@ -305,10 +301,7 @@ void loop() {
           client.print(F("."));
           client.print(EEPROM.read(516));
           client.println(F("\">"));
-          client.println(F("<meta name=\"description\" content=\"ArtGateOne v.1.0 setup page.\">"));
-          client.println(F("<meta name=\"keywords\" content=\"HTML,CSS,XML,JavaScript\">"));
           client.println(F("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"));
-          client.println(F("<meta name=\"author\" content=\"ArtGateOne\">"));
           client.println(F("<style>"));
           client.println(F("body {text-align: center;}"));
           client.println(F("div {width:340px; display: inline-block; text-align: center;}"));
@@ -318,7 +311,7 @@ void loop() {
           client.println(F("</head>"));
           client.println(F("<body>"));
           client.println(F("<div>"));
-          client.println(F("<h2>ArtGateOne Setup</h2>"));
+          client.println(F("<h2>ArtGateOne</h2>"));
           client.println(F("<h2>Save configuration...</h2>"));
           client.println(F("</div>"));
           client.println(F("</form>"));
@@ -328,7 +321,8 @@ void loop() {
           client.stop();
           strwww = String();
           post = 0;
-          if (EEPROM.read(512) == 0) {
+          if (EEPROM.read(512) == 1) {
+            oled.println("DHCP...");
             Ethernet.begin(mac);
             Ethernet.maintain();
           } else {
@@ -368,8 +362,8 @@ void loop() {
   if (packetSize == 14 || packetSize == 18) {
     invert = !invert;
     oled.invertDisplay(invert);
+    //incrementCounter();
     // send a ArtPollReply to the IP address and port that sent us the packet we received
-    // Udp.beginPacket(Udp.remoteIP(), Udp.remotePort());
     Udp.beginPacket(Udp.remoteIP(), Udp.remotePort());
     Udp.write(ArtPollReply, 239);
     Udp.endPacket();
@@ -387,7 +381,7 @@ void loop() {
   }
 }  // end loop()
 
-void makeArtPollReply() {
+void makeArtPollReply() {       //Art-Net 4 Protocol Release V1.4dh 19/7/2023
   ArtPollReply[0] = byte('A');  // A
   ArtPollReply[1] = byte('r');  // r
   ArtPollReply[2] = byte('t');  // t
@@ -413,14 +407,18 @@ void makeArtPollReply() {
 
   ArtPollReply[18] = intN;  // NetSwitch
   ArtPollReply[19] = intS;  // Net Sub Switch
+
   ArtPollReply[20] = 0xFF;  // OEMHi
   ArtPollReply[21] = 0xFF;  // OEMLow
+
   ArtPollReply[22] = 0x00;  // Ubea Version
-  ArtPollReply[23] = 0xF0;  // Status1
+
+  ArtPollReply[23] = 0xE0;  // Status1
+
   ArtPollReply[24] = 0x00;  // ESTA LO
   ArtPollReply[25] = 0x00;  // ESTA HI
 
-  ArtPollReply[26] = byte('A');  // A  //Short Name
+  ArtPollReply[26] = byte('A');  // A  //Short Name [18]
   ArtPollReply[27] = byte('r');  // r
   ArtPollReply[28] = byte('t');  // t
   ArtPollReply[29] = byte('G');  // G
@@ -431,11 +429,7 @@ void makeArtPollReply() {
   ArtPollReply[34] = byte('n');  // n
   ArtPollReply[35] = byte('e');  // e
 
-  for (int i = 36; i <= 43; i++) {  // Short Name
-    ArtPollReply[i] = 0x00;
-  }
-
-  ArtPollReply[44] = byte('A');  // A  //Long Name
+  ArtPollReply[44] = byte('A');  // A  //Long Name [64]
   ArtPollReply[45] = byte('r');  // r
   ArtPollReply[46] = byte('t');  // t
   ArtPollReply[47] = byte('G');  // G
@@ -454,44 +448,48 @@ void makeArtPollReply() {
   ArtPollReply[60] = byte('.');  // .
   ArtPollReply[61] = byte('4');  // 4
 
-  for (int i = 62; i <= 107; i++) {  // Long Name
-    ArtPollReply[i] = 0x00;
-  }
+  //ArtPollReply[108] = 0x00; // NodeReport
 
-  for (int i = 108; i <= 171; i++) {  // NodeReport
-    ArtPollReply[i] = 0x00;
-  }
-
-  ArtPollReply[172] = 0x00;  // NumPorts Hi
+  ArtPollReply[172] = 0x01;  // NumPorts Hi
   ArtPollReply[173] = 0x01;  // NumPorts Lo
-  ArtPollReply[174] = 0x80;  // Port 0 Type
-  ArtPollReply[175] = 0x00;  // Port 1 Type
-  ArtPollReply[176] = 0x00;  // Port 2 Type
-  ArtPollReply[177] = 0x00;  // Port 3 Type
-  ArtPollReply[178] = 0x00;  // GoodInput 0
-  ArtPollReply[179] = 0x00;  // GoodInput 1
-  ArtPollReply[180] = 0x00;  // GoodInput 2
-  ArtPollReply[181] = 0x00;  // GoodInput 3
-  ArtPollReply[182] = 0x80;  // GoodOutput 0
-  ArtPollReply[183] = 0x00;  // GoodOutput 1
-  ArtPollReply[184] = 0x00;  // GoodOutput 2
-  ArtPollReply[185] = 0x00;  // GoodOutput 3
-  ArtPollReply[186] = 0x00;  // SwIn 0
-  ArtPollReply[187] = 0x00;  // SwIn 1
-  ArtPollReply[188] = 0x00;  // SwIn 2
-  ArtPollReply[189] = 0x00;  // SwIn 3
-  ArtPollReply[190] = intU;  // SwOut 0
-  ArtPollReply[191] = 0x00;  // SwOut 1
-  ArtPollReply[192] = 0x00;  // SwOut 2
-  ArtPollReply[193] = 0x00;  // SwOut 3
-  ArtPollReply[194] = 0x01;  // SwVideo
-  ArtPollReply[195] = 0x00;  // SwMacro
-  ArtPollReply[196] = 0x00;  // SwRemote
-  ArtPollReply[197] = 0x00;  // Spare
-  ArtPollReply[198] = 0x00;  // Spare
-  ArtPollReply[199] = 0x00;  // Spare
-  ArtPollReply[200] = 0x00;  // Style
-  // MAC ADDRESS
+
+  ArtPollReply[174] = 0x80;  // Port Types [0]
+  //ArtPollReply[175] = 0x00;  // Port Types [1]
+  //ArtPollReply[176] = 0x00;  // Port Types [2]
+  //ArtPollReply[177] = 0x00;  // Port Types [3]
+
+  //ArtPollReply[178] = 0x00;  // GoodInput [0]
+  //ArtPollReply[179] = 0x00;  // GoodInput [1]
+  //ArtPollReply[180] = 0x00;  // GoodInput [2]
+  //ArtPollReply[181] = 0x00;  // GoodInput [3]
+
+  ArtPollReply[182] = 0x80;  // GoodOutputA [0]
+  //ArtPollReply[183] = 0x00;  // GoodOutputA [1]
+  //ArtPollReply[184] = 0x00;  // GoodOutputA [2]
+  //ArtPollReply[185] = 0x00;  // GoodOutputA [3]
+
+  //ArtPollReply[186] = 0x00;  // SwIn [0]
+  //ArtPollReply[187] = 0x00;  // SwIn [1]
+  //ArtPollReply[188] = 0x00;  // SwIn [2]
+  //ArtPollReply[189] = 0x00;  // SwIn [3]
+
+  ArtPollReply[190] = intU;  // SwOut [0]
+  //ArtPollReply[191] = 0x00;  // SwOut [1]
+  //ArtPollReply[192] = 0x00;  // SwOut [2]
+  //ArtPollReply[193] = 0x00;  // SwOut [3]
+
+  //ArtPollReply[194] = 0x00;  // AcnPriority
+
+  //ArtPollReply[195] = 0x00;  // SwMacro
+
+  //ArtPollReply[196] = 0x00;  // SwRemote
+
+  //ArtPollReply[197] = 0x00;  // Spare
+  //ArtPollReply[198] = 0x00;  // Spare
+  //ArtPollReply[199] = 0x00;  // Spare
+
+  //ArtPollReply[200] = 0x00;  // Style
+
   ArtPollReply[201] = mac[0];  // MAC HI
   ArtPollReply[202] = mac[1];  // MAC
   ArtPollReply[203] = mac[2];  // MAC
@@ -499,21 +497,40 @@ void makeArtPollReply() {
   ArtPollReply[205] = mac[4];  // MAC
   ArtPollReply[206] = mac[5];  // MAC LO
 
-  ArtPollReply[207] = 0x00;  // BIND IP 0
-  ArtPollReply[208] = 0x00;  // BIND IP 1
-  ArtPollReply[209] = 0x00;  // BIND IP 2
-  ArtPollReply[210] = 0x00;  // BIND IP 3
-  ArtPollReply[211] = 0x00;  // BInd Index
+  //ArtPollReply[207] = 0x00;  // BIND IP 0
+  //ArtPollReply[208] = 0x00;  // BIND IP 1
+  //ArtPollReply[209] = 0x00;  // BIND IP 2
+  //ArtPollReply[210] = 0x00;  // BIND IP 3
+  //ArtPollReply[211] = 0x00;  // BInd Index
 
-  ArtPollReply[212] = 0x05;  // Status2
-  if (EEPROM.read(512) == 0) {
-    ArtPollReply[212] = 0x07;  // DHCP USED
+  ArtPollReply[212] = 0x0D;  // Status2
+  if (EEPROM.read(512) == 1) {
+    ArtPollReply[212] = 0x0F;  // DHCP USED
   }
-  for (int i = 213; i <= 239; i++) {  // Filler
-    ArtPollReply[i] = 0x00;
-  }
+
+  //ArtPollReply[213] = 0x00;  // GoodOutputB [0]
+  //ArtPollReply[214] = 0x00;  // GoodOutputB [1]
+  //ArtPollReply[215] = 0x00;  // GoodOutputB [2]
+  //ArtPollReply[216] = 0x00;  // GoodOutputB [3]
+
+  ArtPollReply[217] = 0x20;  // Status3
+
+  //ArtPollReply[218] = 0x00;  // DefaulRespUID Hi
+  //ArtPollReply[219] = 0x00;  // DefaulRespUID
+  //ArtPollReply[220] = 0x00;  // DefaulRespUID
+  //ArtPollReply[221] = 0x00;  // DefaulRespUID
+  //ArtPollReply[222] = 0x00;  // DefaulRespUID
+  //ArtPollReply[223] = 0x00;  // DefaulRespUID Lo
+
+  //ArtPollReply[224] = 0x00;  // UserHi
+  //ArtPollReply[225] = 0x00;  // UserLo
+  //ArtPollReply[226] = 0x00;  // RefreshRateHi
+  //ArtPollReply[227] = 0x00;  // RefreshRateLo
+
+  //Filler 11 x 8 Transmit as zero. For future expansion.
+
   return;
-}
+}  // end makeArtPollReply()
 
 void datadecode() {
   int j = 0;
@@ -660,7 +677,7 @@ void datadecode() {
       }
     }
   }
-}
+}  // end datadecode()
 
 int dataadd(int i) {
   data = 0;
@@ -691,22 +708,17 @@ int datamac(int i) {
 
 void displaydata() {
   oled.clear();
-  oled.print(" IP : ");
-  oled.print(Ethernet.localIP());
+  oled.print(" IP: ");
+  oled.println(Ethernet.localIP());
+  
+  oled.print(" U: ");
+  oled.print((intUniverse + (intN * 256)));
+
+
   if (EEPROM.read(534) == 1) {
-    oled.println("  BS");
+    oled.println(" BS");
   } else {
     oled.println();
   }
-  /*
-  oled.print("Net ");
-  oled.print(intN, HEX);
-  oled.print("  Sub ");
-  oled.print(intS, HEX);
-  oled.print("  Uni ");
-  oled.print(intU, HEX);
-  */
-  oled.print(" Universe ");
-  oled.print(intUniverse);
   return;
 }  // end displaydata()
