@@ -13,7 +13,7 @@
 
 #define DMX512 (0)        // (250 kbaud - 2 to 512 channels) Standard USITT DMX-512
 #define analogPin A3      //Factory default
-#define I2C_ADDRESS 0x3C  // OLED i2c addres - 0x3C 128x32, 0x3D 128x64
+#define I2C_ADDRESS 0x3C  // OLED i2c addres
 
 SSD1306AsciiAvrI2c oled;
 
@@ -767,7 +767,7 @@ void displaydata() {  //Display oled data
   oled.print(" IP : ");
   oled.println(Ethernet.localIP());
 
-  if (I2C_ADDRESS == 0x3D) {
+ /*
     oled.print(" Mask: ");
     oled.println(Ethernet.subnetMask());
 
@@ -777,7 +777,7 @@ void displaydata() {  //Display oled data
     oled.print(intS, HEX);
     oled.print("  Uni ");
     oled.println(intU, HEX);
-  }
+*/
 
   oled.print(" Universe ");
   oled.print((intUniverse + (intN * 256)));
