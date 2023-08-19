@@ -133,7 +133,7 @@ void loop() {
             client.println(F("User-Agent: ArtGateOne"));
             client.println();
             client.println(F("<!DOCTYPE HTML>"));
-            client.println(F("<html>"));
+            client.println(F("<html lang='en'>"));
             client.println(F("<head>"));
             client.println(F("<link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAFzUkdCAK7OHOkAAAAEZ0FNQQAAsY8L/GEFAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAX3pUWHRSYXcgcHJvZmlsZSB0eXBlIEFQUDEAAAiZ40pPzUstykxWKCjKT8vMSeVSAANjEy4TSxNLo0QDAwMLAwgwNDAwNgSSRkC2OVQo0QAFmJibpQGhuVmymSmIzwUAT7oVaBst2IwAAAGiSURBVDhPfZI7TwJREIVH0Ig8FHQRRPH1C9TSGAM/guVhjCQGSXzFytigndFKTbTAVu1JNBZEG6w0kRBsaDARwRYCKGAz7l4mi7i7ftXMObNnZ+9dQBUymQyenZ5Sp45qQHg5hACqtoTqhPiwrrML7+/uSVFGIwzKuIvHQTQ4joPzaLQpqtAhplAtEfD5oPb1BcnnJOQ+CuKW5MhR3KBWr8PG5haUSiUwG4xwdXFJjgLiBr853D/Ah0SC1aI96hjG+dk51ishC5iZmqYKkfd4cMQ+9O9tyD7BOmilCiC4FIRisQic2QInx0ek/oGCGJFIBAv5AnVNOoSR8REnTo6NkdJO2y3YLAPALy5ApVxmvV6vh9vrG9BqNPCae4NyuQImk5F5EixG4LvRQL/XT12Lp8dH7NZ2op2z4s72NqktpID1tTUsvOepa0d8z4RzFI3dOlJaSAFOh4MqOavhMDoGbagVgl7SaVKbsIBsNovh0AoTlEilUmyL3h4DBrxeUpuwQ4zFYuB2uaDPbGbnosTe7i70WyxQrX5CXvi93W438DwPP40aa/Jc/0S8AAAAAElFTkSuQmCC\">"));
             client.println(F("<title>ArtGateOne setup</title>"));
