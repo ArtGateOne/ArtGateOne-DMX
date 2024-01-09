@@ -90,7 +90,9 @@ Web configuration not work on Firefox - use Edge,Chrome,Opera ...
 If U use DMX Shield
 
 Set correct control pin
-change line (98)
+
+change -1 in line (98)
+
 ArduinoDmx0.set_control_pin(-1);
-to 
-ArduinoDmx0.set_control_pin(2);
+
+to correct pin number to control TX
