@@ -95,7 +95,7 @@ void setup() {
   Udp.begin(localPort);
   displaydata();
 
-  ArduinoDmx0.set_control_pin(-1);   // Arduino output pin for MAX485 input/output control (connect to MAX485-1 pins 2-3)(-1 not used)
+  ArduinoDmx0.set_control_pin(2);   // Arduino output pin for MAX485 input/output control (connect to MAX485-1 pins 2-3)(-1 not used)(2 control pin 2)
   ArduinoDmx0.set_tx_address(1);     // set rx1 start address
   ArduinoDmx0.set_tx_channels(512);  // 2 to 2048!! channels in DMX1000K (512 in standard mode) See lib_dmx.h  *** new *** EXPERIMENTAL
   ArduinoDmx0.init_tx(DMX512);       // starts universe 1 as tx, standard DMX 512 - See lib_dmx.h, now support for DMX faster modes (DMX 1000K)
