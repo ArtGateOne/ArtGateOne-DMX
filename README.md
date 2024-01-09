@@ -45,7 +45,7 @@ MAX485 module
 
 RO --> not connnected
 
-RE + DE + VCC --> 5v
+RE + DE + VCC --> 5v (or VCC --> +5 , and RE + DE --> D2 PIN)
 
 DI --> TX (D1 PIN)
 
